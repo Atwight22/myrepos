@@ -18,11 +18,11 @@
     @csrf
     <div class="comment-container row justify-content-center">
         <div class="input-group comment-area">
-        {{--SHIFT + ENTERでも送信可能--}} 
-            <textarea class="form-control" id="comment" name="comment" placeholder="push massage (shift + Enter)"
-                aria-label="With textarea"
-                onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
-            <button type="submit" id="submit" class="btn btn-outline-primary comment-btn">Submit</button>
+            {{--SHIFT + ENTERでも送信可能--}} 
+                <textarea class="form-control" id="comment" name="comment" placeholder="push massage (shift + Enter)"
+                    aria-label="With textarea"
+                    onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                <button type="submit" id="submit" class="btn btn-outline-primary comment-btn">Submit</button>
         </div>
     </div>
 </form>
