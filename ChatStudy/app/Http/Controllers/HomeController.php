@@ -41,4 +41,12 @@ class HomeController extends Controller
     ]);
     return redirect()->route('home');
 }
+
+// jsonを返す
+public function getData()
+{
+    $comments = Comment::orderBy('created_at', 'desc')->get();
+    $json = ["comments" => $comments];
+    return response()->json($json);
+}
 }
