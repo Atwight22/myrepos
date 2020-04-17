@@ -6,12 +6,13 @@ function get_data() {
     $.ajax({
         url: "result/ajax/",
         dataType: "json",
+        // 成功した場合
         success: data => {
             $("#comment-data")
                 .find(".comment-visible")
                 .remove();
-        
-            for (var i = 0; i < data.comments.length; i++) {
+            // 新着コメントを最下位表示にする
+            for (var i = data.comments.length-1; i >= 0;  i--) {
                 var html = `
                             <div class="media comment-visible">
                                 <div class="media-body comment-body">
