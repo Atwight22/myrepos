@@ -35,3 +35,20 @@ function get_data() {
 
     setTimeout("get_data()", 5000);
 }
+
+$('.media comment-visible').click(function(){
+    var index = $('.media comment-visible').index(this);
+    edit_comment(index);
+});
+
+function edit_comment(index){
+    $.ajax({
+        url: "result/ajax/",
+        dataType: "json",
+        // 成功した場合
+        success: data => {
+         $('#form-control').text(data.comments[index].comment)
+        }
+    });
+
+}

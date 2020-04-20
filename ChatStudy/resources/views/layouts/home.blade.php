@@ -15,7 +15,7 @@
 <div class="comment-container row justify-content-center">
     <div class="input-group comment-area">
         <textarea class="form-control" placeholder="input massage" aria-label="With textarea"></textarea>
-        <button type="input-group-prepend button" class="btn btn-outline-primary comment-btn">Submit</button>
+        <button type="input-group-prepend button" class="btn btn-outline-primary comment-btn">送信</button>
     </div>
 </div>
 
