@@ -17,7 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    <!-- app.cssを読み込む-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- view.cssを読み込む-->
     <link href="{{ asset('css/view.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -74,10 +76,11 @@
         </nav>
 
         <main class="py-4">
+        <!-- @yield('content')で子ファイル(\resources\views\home.blade.php)呼び出し-->
             @yield('content')
         </main>
     </div>
-
+    <!-- @yield('js')で子ファイル(\resources\views\home.blade.php)呼び出し-->
     @yield('js')
 </body>
 </html>

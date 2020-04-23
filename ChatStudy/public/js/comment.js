@@ -12,7 +12,7 @@ function get_data() {
                 .find(".comment-visible")
                 .remove();
             // 新着コメントを最下位表示にする
-            for (var i = data.comments.length-1; i >= 0;  i--) {
+            for (var i = 0; i < data.comments.length;  i++) {
                 var html = `
                             <div class="media comment-visible">
                                 <div class="media-body comment-body">
