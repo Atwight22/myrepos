@@ -1,5 +1,6 @@
 $(function() {
     get_data();
+    
 });
 
 function get_data() {
@@ -12,13 +13,16 @@ function get_data() {
                 .find(".comment-visible")
                 .remove();
             // 新着コメントを最下位表示にする
-            for (var i = 0; i < data.comments.length;  i++) {
+            for (var i = data.comments.length-1; i > 1;  i--) {
+                var beforeDate = moment(data.comments[i].created_at, "YYYY-MM-DD HH:mm"); 
+                var date = beforeDate.format('YYYY/MM/DD/ HH:mm');
                 var html = `
                             <div class="media comment-visible">
                                 <div class="media-body comment-body">
                                     <div class="row">
                                         <span class="comment-body-user" id="name">${data.comments[i].name}</span>
-                                        <span class="comment-body-time" id="created_at">${data.comments[i].created_at}</span>
+                                        <span class="comment-body-time" id="created_at">${date}</span>
+                                        <button type="button" name="edit" value="${data.comments[i].comment}" onclick="edit(this.value)">編集</span>
                                     </div>
                                     <span class="comment-body-content" id="comment">${data.comments[i].comment}</span>
                                 </div>
@@ -34,21 +38,4 @@ function get_data() {
     });
 
     setTimeout("get_data()", 5000);
-}
-
-$('.comment').click(function(){
-    var index = $('.comment').index(this);
-    edit_comment(index);
-});
-
-function edit_comment(index){
-    $.ajax({
-        url: "result/ajax/",
-        dataType: "json",
-        // 成功した場合
-        success: data => {
-            $('textarea[name="comment"]').val(data.comments[index].comment);
-        }
-    });
-
 }

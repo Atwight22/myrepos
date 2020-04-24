@@ -7,6 +7,7 @@
             <div class="card-header">Comment</div>
             <div class="card-body chat-card">
                 <div id="comment-data"></div>
+                
             </div>
         </div>
     </div>

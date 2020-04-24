@@ -22,7 +22,8 @@ class HomeController extends Controller
         // Commentテーブルの全てのデータget
         // 返り値はCommentクラスなので、foreachでまわせばデータ取得できる
         $comments = Comment::get();
-        // homeのViewを表示させる。変数を定義してViewに渡す
+        // homeのViewを表示。変数を定義してViewに渡す
+        // ここで指定するviewファイルはresources/viewsの中に保存しなければいけない
         return view('home', ['comments' => $comments]);
     }
     //コメントをDBに保存
@@ -46,8 +47,9 @@ class HomeController extends Controller
 public function getData()
 {
     //Commentテーブルのデータを並び替えて取得
-    $comments = Comment::orderBy('created_at', 'asc')->get();
+    $comments = Comment::orderBy('created_at', 'desc')->get();
     $json = ["comments" => $comments];
+    // json()でレスポンスをjson形式にする
     return response()->json($json);
 }
 }
