@@ -16,8 +16,6 @@
                     function edit(comment){
                         document.getElementById( "input-comment" ).value = comment;
                         alert(comment);
-                    
-
                     }
                 </script>
             </div>

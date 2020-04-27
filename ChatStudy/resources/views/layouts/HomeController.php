@@ -27,7 +27,7 @@ class HomeController extends Controller
         return view('home', ['comments' => $comments]);
     }
     //コメントをDBに保存
-    public function add(Request $request)
+    public function add(Request $request,$comment_id)
 {
     // Auth::user()で現在認証されているユーザ取得
     $user = Auth::user();
@@ -35,14 +35,30 @@ class HomeController extends Controller
     $comment = $request->input('comment');
 
     // create()でインスタンスの作成→属性の代入→データの保存
-    Comment::create([
-        'login_id' => $user->id,
-        'name' => $user->name,
-        'comment' => $comment
+    Comment::updateOrCreate([
+        ['id' => $id],
+    ['comment' => $comment]
     ]);
     // homeへリダイレクトさせる
     return redirect()->route('home');
 }
+
+
+// 編集したコメントを保存
+public function edit(Request $request, $comment_id){
+$item = Comment::find($comment_id);
+    //input()でユーザ入力を取得
+    $comment = $request->input('comment');
+
+    Comment::table('')
+    ->where('id', 1)
+    ->update([
+        'name' => '名前xxx2'
+    ]);
+
+}
+
+
 // jsonを返す
 public function getData()
 {
