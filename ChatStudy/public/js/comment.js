@@ -20,9 +20,10 @@ function get_data() {
                             <div class="media comment-visible">
                                 <div class="media-body comment-body">
                                     <div class="row">
+                                        <span class="comment-body-id" id="comment_id">${data.comments[i].id}</span>
                                         <span class="comment-body-user" id="name">${data.comments[i].name}</span>
                                         <span class="comment-body-time" id="created_at">${date}</span>
-                                        <button type="button" name="edit" value="${data.comments[i].comment}" onclick="edit(this.value)">編集</span>
+                                        <button type="button" name="edit" value="${data.comments[i].comment}" onclick="edit(this.value,${data.comments[i].id})">編集</span>
                                     </div>
                                     <span class="comment-body-content" id="comment">${data.comments[i].comment}</span>
                                 </div>

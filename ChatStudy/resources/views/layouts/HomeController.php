@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Comment;
 use Illuminate\Support\Facades\Auth;
 
+include 'ChromePhp.php';
+
+
 
 class HomeController extends Controller
 {
@@ -27,43 +30,45 @@ class HomeController extends Controller
         return view('home', ['comments' => $comments]);
     }
     //コメントをDBに保存
-    public function add(Request $request,$comment_id)
-{
-    // Auth::user()で現在認証されているユーザ取得
-    $user = Auth::user();
-    //input()でユーザ入力を取得
-    $comment = $request->input('comment');
+    public function add(Request $request)
+    {
+        // Auth::user()で現在認証されているユーザ取得
+        $user = Auth::user();
+        //input()でユーザ入力を取得
+        $comment = $request->input('comment');
+    
+        // create()でインスタンスの作成→属性の代入→データの保存
+        $id = $request->input('id');
+        
+ChromePhp::log($id);
+        Comment::updatOrCreate([
+            
+            ['id' => $request->input('id')],
+            ['login_id' => $user->id,
+            'name' => $user->name,
+            'comment' => $comment]
+        ]);
+        // homeへリダイレクトさせる
+        return redirect()->route('home');
+    }
 
-    // create()でインスタンスの作成→属性の代入→データの保存
-    Comment::updateOrCreate([
-        ['id' => $id],
-    ['comment' => $comment]
-    ]);
+
+    // 編集したコメントを保存
+    public function update(Request $request){
+        $items = Comment::where('id',$id)->get();
+        //input()でユーザ入力を取得
+        $items->comment = $request->input('comment');
+        $items->save();
     // homeへリダイレクトさせる
     return redirect()->route('home');
-}
-
-
-// 編集したコメントを保存
-public function edit(Request $request, $comment_id){
-$item = Comment::find($comment_id);
-    //input()でユーザ入力を取得
-    $comment = $request->input('comment');
-
-    Comment::table('')
-    ->where('id', 1)
-    ->update([
-        'name' => '名前xxx2'
-    ]);
-
-}
+    }
 
 
 // jsonを返す
 public function getData()
 {
     //Commentテーブルのデータを並び替えて取得
-    $comments = Comment::orderBy('created_at', 'desc')->get();
+    $comments = Comment::orderBy('created_at', 'asc')->get();
     $json = ["comments" => $comments];
     // json()でレスポンスをjson形式にする
     return response()->json($json);
