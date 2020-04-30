@@ -29,39 +29,38 @@ class HomeController extends Controller
         // ここで指定するviewファイルはresources/viewsの中に保存しなければいけない
         return view('home', ['comments' => $comments]);
     }
-    //コメントをDBに保存
-    public function add(Request $request)
-    {
-        // Auth::user()で現在認証されているユーザ取得
-        $user = Auth::user();
-        //input()でユーザ入力を取得
-        $comment = $request->input('comment');
+
+
     
-        // create()でインスタンスの作成→属性の代入→データの保存
-        $id = $request->input('id');
-        
-ChromePhp::log($id);
-        Comment::updatOrCreate([
-            
-            ['id' => $request->input('id')],
-            ['login_id' => $user->id,
+   //コメントをDBに保存
+   public function add(Request $request)
+   {
+       // Auth::user()で現在認証されているユーザ取得
+       $user = Auth::user();
+       //input()でユーザ入力を取得
+       $comment = $request->input('comment');
+       $id = $request->input('comment_id');
+   
+       // create()でインスタンスの作成→属性の代入→データの保存
+       Comment::updateOrCreate(
+           ['id' => $id],
+           ['login_id' => $user->id,
             'name' => $user->name,
             'comment' => $comment]
-        ]);
-        // homeへリダイレクトさせる
+       );
+       // index()へリダイレクトさせる
+       return redirect()->route('home');
+   }
+
+   // コメント完全削除
+   public function delete(Request $request){
+       $id = $request->input('id');
+       $item = Comment::where('id',$id)->get();
+       $item->delete();
+        // index()へリダイレクトさせる
         return redirect()->route('home');
-    }
+   }
 
-
-    // 編集したコメントを保存
-    public function update(Request $request){
-        $items = Comment::where('id',$id)->get();
-        //input()でユーザ入力を取得
-        $items->comment = $request->input('comment');
-        $items->save();
-    // homeへリダイレクトさせる
-    return redirect()->route('home');
-    }
 
 
 // jsonを返す

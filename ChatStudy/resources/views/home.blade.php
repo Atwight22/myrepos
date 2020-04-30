@@ -12,20 +12,32 @@
             <!-- comment-dataにコメント埋め込み -->
                 <div id="comment-data"></div>
                 <script>
-                    // edit()は編集ボタン押下時に呼ばれる
-                    window.edit = function edit(comment,id){
+                    // delete()は削除ボタン押下時に呼ばれる
+                    function del(comment,id){
                         document.getElementById("id").value = id;
                         document.getElementById( "input-comment" ).value = comment;
-                        //document.send.action = {{route('update')}};
+                        // document.send.value = 'delete';
+                        document.send.action = "{{route('delete')}}";
                         console.log(id,comment);
-                        alert(id,comment);
+                        
                     }
+                    // edit()は編集ボタン押下時に呼ばれる
+                    function edit(comment,id){
+                        document.getElementById("id").value = id;
+                        document.getElementById( "input-comment" ).value = comment;     
+                        // document.send.value = 'add';
+                        console.log(id,comment);
+                        
+                    }
+
+
                 </script>
             </div>
         </div>
     </div>
 </div>
         <form name="send" method="POST" action="{{route('add')}}">
+        
     @csrf
     <div class="comment-container row justify-content-center">
         <div class="input-group comment-area">
@@ -35,11 +47,24 @@
                 aria-label="With textarea"
                 onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
                 <button type="submit" id="submit" class="btn btn-outline-primary comment-btn">送信</button>
+                
+                
         </div>
     </div>
 </form>
-        
+        <script>
+            
+                var submitButton = document.getElementById('submit');
+                submitButton.disabled = true;
+
+                var inputText = document.getElementById('input-comment').value;
+                if(inputText != undefined || inputText != null){
+                    //submitButton.disabled = false;
+                }
+            
+        </script>
     </div>
+
 @endsection
 
 @section('js')
