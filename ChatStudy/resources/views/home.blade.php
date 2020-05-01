@@ -15,17 +15,19 @@
                     // delete()は削除ボタン押下時に呼ばれる
                     function del(comment,id){
                         document.getElementById("id").value = id;
-                        document.getElementById( "input-comment" ).value = comment;
-                        // document.send.value = 'delete';
-                        document.send.action = "{{route('delete')}}";
-                        console.log(id,comment);
+                       
+                            if( confirm("本当に削除しても良いですか？") ) {
+                                document.send.action = "{{route('delete')}}";
+                                document.getElementById('submit').click();
+                                console.log(id,comment);
+                            }
+                                
                         
                     }
                     // edit()は編集ボタン押下時に呼ばれる
                     function edit(comment,id){
                         document.getElementById("id").value = id;
                         document.getElementById( "input-comment" ).value = comment;     
-                        // document.send.value = 'add';
                         console.log(id,comment);
                         
                     }
@@ -46,22 +48,37 @@
                 <textarea class="form-control" id="input-comment" name="comment" placeholder="メッセージを送信 (shift + Enter)"
                 aria-label="With textarea"
                 onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
-                <button type="submit" id="submit" class="btn btn-outline-primary comment-btn">送信</button>
+                <button type="submit" id="submit" class="btn btn-outline-primary comment-btn" >送信</button>
                 
                 
         </div>
     </div>
 </form>
         <script>
-            
-                var submitButton = document.getElementById('submit');
-                submitButton.disabled = true;
 
-                var inputText = document.getElementById('input-comment').value;
-                if(inputText != undefined || inputText != null){
-                    //submitButton.disabled = false;
-                }
-            
+            // DOMContentLoadedは最初のHTMLの読み込みが完了したら、css、画像、サブフレームの読み込みが完了するのを待たずに実行する。
+            window.addEventListener('DOMContentLoaded',function(){
+            document.getElementById('submit').disabled = true;
+            //keyupはキーが離されたときイベント発生
+            document.getElementById('input-comment').addEventListener('keyup',function(){
+            // 入力値が1文字以下
+            if (this.value.length < 1) {
+                // 非活性
+                document.getElementById('submit').disabled = true;
+            } else {
+                // 活性
+                document.getElementById('submit').disabled = false;
+            }
+            },false);
+            //changeは入力値が変更されたときイベント発生
+            document.getElementById('input-comment').addEventListener('change',function(){
+            if (this.value.length < 1) {
+            document.getElementById('submit').disabled = true;
+            }
+            },false);
+            },false);
+               
+                
         </script>
     </div>
 
