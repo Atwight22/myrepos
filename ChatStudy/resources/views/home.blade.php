@@ -14,20 +14,23 @@
                 <script>
                     // delete()は削除ボタン押下時に呼ばれる
                     function del(comment,id){
+                        document.getElementById( "input-comment" ).value = comment;
                         document.getElementById("id").value = id;
-                       
+                         
+                        
+                        
                             if( confirm("本当に削除しても良いですか？") ) {
                                 document.send.action = "{{route('delete')}}";
+                                document.getElementById('submit').disabled = false;
                                 document.getElementById('submit').click();
                                 console.log(id,comment);
                             }
-                                
-                        
                     }
                     // edit()は編集ボタン押下時に呼ばれる
                     function edit(comment,id){
+                        document.getElementById( "input-comment" ).value = comment;    
                         document.getElementById("id").value = id;
-                        document.getElementById( "input-comment" ).value = comment;     
+                         
                         console.log(id,comment);
                         
                     }
@@ -38,19 +41,18 @@
         </div>
     </div>
 </div>
+
         <form name="send" method="POST" action="{{route('add')}}">
-        
-    @csrf
-    <div class="comment-container row justify-content-center">
-        <div class="input-group comment-area">
-        <!--SHIFT + ENTERでも送信可能 -->
-                <input type="hidden" name="comment_id" id="id">
-                <textarea class="form-control" id="input-comment" name="comment" placeholder="メッセージを送信 (shift + Enter)"
-                aria-label="With textarea"
-                onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
-                <button type="submit" id="submit" class="btn btn-outline-primary comment-btn" >送信</button>
-                
-                
+            @csrf
+            <div class="comment-container row justify-content-center">
+                <div class="input-group comment-area">
+                <!--SHIFT + ENTERでも送信可能 -->
+                        <input type="hidden" name="comment_id" id="id">
+                        <textarea class="form-control" id="input-comment" name="comment" placeholder="メッセージを送信 (shift + Enter)"
+                        aria-label="With textarea"
+                        onkeydown="if(event.shiftKey&&event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+                        <button type="submit" id="submit" class="btn btn-outline-primary comment-btn">送信</button>
+                        
         </div>
     </div>
 </form>
@@ -80,6 +82,8 @@
                
                 
         </script>
+
+      
     </div>
 
 @endsection

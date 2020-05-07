@@ -52,14 +52,13 @@ class HomeController extends Controller
        return redirect()->route('home');
    }
 
-   // コメント完全削除
+   // コメント削除
    public function delete(Request $request){
-       $id = $request->input('id');
-       $item = Comment::where('id',$id)->get();
-       $item->delete();
-        // index()へリダイレクトさせる
-        return redirect()->route('home');
-   }
+    $id = $request->input('comment_id');
+    $item = Comment::where('id', $id)->delete();
+     // home経由でindex()へリダイレクトさせる
+     return redirect()->route('home');
+}
 
 
 

@@ -48,7 +48,7 @@ class HomeController extends Controller
             'name' => $user->name,
             'comment' => $comment]
        );
-       // index()へリダイレクトさせる
+       // home経由でindex()へリダイレクトさせる
        return redirect()->route('home');
    }
 
@@ -56,7 +56,7 @@ class HomeController extends Controller
    public function delete(Request $request){
        $id = $request->input('comment_id');
        $item = Comment::where('id', $id)->delete();
-        // index()へリダイレクトさせる
+        // home経由でindex()へリダイレクトさせる
         return redirect()->route('home');
    }
 
@@ -71,4 +71,12 @@ public function getData()
     // json()でレスポンスをjson形式にする
     return response()->json($json);
 }
+
+//自分のコメントのみ取得
+// public function getUserId(){
+//      // ログイン中のユーザーID
+//      $userId = Auth::id();
+//      $item = Comment::where('login_id', $userId)->get();
+//      return $item;
+// }
 }
