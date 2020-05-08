@@ -16,8 +16,6 @@
                     function del(comment,id){
                         document.getElementById( "input-comment" ).value = comment;
                         document.getElementById("id").value = id;
-                         
-                        
                         
                             if( confirm("本当に削除しても良いですか？") ) {
                                 document.send.action = "{{route('delete')}}";

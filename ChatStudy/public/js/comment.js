@@ -15,6 +15,7 @@ function get_data() {
             // 新着コメントを最下位表示にする
             for (var i = data.comments.length-1; i >= 0;  i--) {
                 var loginId = "{{ Auth::id()}}";
+                // ログイン時のユーザＩＤとコメント登録時のユーザＩＤを比較して合致すれば編集削除ボタン押下できる仕様にする？
                 var beforeDate = moment(data.comments[i].created_at, "YYYY-MM-DD HH:mm"); 
                 var date = beforeDate.format('YYYY/MM/DD/ HH:mm');
                 var html = `
@@ -23,13 +24,21 @@ function get_data() {
                                     <div class="row">
                                         <span class="comment-body-user" id="name">${data.comments[i].name}</span>
                                         <span class="comment-body-time" id="created_at">${date}</span>
-                                        <button type="button" name="edit" value="${data.comments[i].comment}" onclick="edit(this.value,${data.comments[i].id})" hidden="if(${data.comments[i].login_id} == ${loginId}){return false;}">編集</button>
-                                        <button type="button" name="delete" value="${data.comments[i].comment}" onclick="del(this.value,${data.comments[i].id})"  hidden="if(${data.comments[i].login_id} == ${loginId}){return false;}">削除</button>
-                                    </div>
+                                        
+                                           
+                                                        <button type="button" name="edit" value="${data.comments[i].comment}" onclick="edit(this.value,${data.comments[i].id})" disabled="if(${data.comments[i].login_id} == ${loginId}){true;}">編集</button>
+                                                        <button type="button" name="delete" value="${data.comments[i].comment}" onclick="del(this.value,${data.comments[i].id})" disabled="if(${data.comments[i].login_id} == ${loginId}){true;}">削除</button>
+                                          
+                                            
+                                        
+                                       
+                                     </div>
                                     <span class="comment-body-content" id="comment">${data.comments[i].comment}</span>
                                 </div>
                             </div>
                         `;
+
+                        
         
                 $("#comment-data").append(html);
             }
