@@ -76,7 +76,6 @@ public function getData()
 // public function getUserId(){
 //      // ログイン中のユーザーID
 //      $userId = Auth::id();
-//      $item = Comment::where('login_id', $userId)->get();
-//      return $item;
+//      return view('home',compact('userId'));
 // }
 }
