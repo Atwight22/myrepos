@@ -13,10 +13,11 @@
                 <div id="comment-data"></div>
                 <script>
                     // delete()は削除ボタン押下時に呼ばれる
-                    function del(comment,id,comId){
+                    function del(comment,id){
                         document.getElementById( "input-comment" ).value = comment;
                         document.getElementById("id").value = id;
-                       console.log(comId);
+                      
+                    
                             if( confirm("本当に削除しても良いですか？") ) {
                                 document.send.action = "{{route('delete')}}";
                                 document.getElementById('submit').disabled = false;
@@ -30,6 +31,11 @@
                         document.getElementById("id").value = id;
                         console.log(id,comment);
                         
+                    }
+
+                    function copy(comment){
+                        navigator.clipboard.writeText(comment);
+                        alert("コピーしました。");
                     }
 
 
