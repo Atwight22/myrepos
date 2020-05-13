@@ -71,4 +71,9 @@ public function getData()
     // json()でレスポンスをjson形式にする
     return response()->json($json);
 }
+
+public function getId(){
+    $id = Auth::id();
+    return $id;
+}
 }

@@ -4,21 +4,25 @@
 
 @section('content')
 
+
 <div class="chat-container row justify-content-center">
     <div class="chat-area">
         <div class="card">
-            <div class="card-header">チャット</div>
+            <div class="card-header" >チャット</div>
             <div class="card-body chat-card">
+                
             <!-- comment-dataにコメント埋め込み -->
                 <div id="comment-data"></div>
                 <script>
+                   
+                    
                     // delete()は削除ボタン押下時に呼ばれる
-                    function del(comment,id){
+                    function del(comment,id,logId){
                         document.getElementById( "input-comment" ).value = comment;
                         document.getElementById("id").value = id;
-                      
+                        console.log(logId);
                     
-                            if( confirm("本当に削除しても良いですか？") ) {
+                            if( confirm("本当に削除しますか？") ) {
                                 document.send.action = "{{route('delete')}}";
                                 document.getElementById('submit').disabled = false;
                                 document.getElementById('submit').click();
@@ -82,6 +86,7 @@
             }
             },false);
             },false);
+
                
 
 

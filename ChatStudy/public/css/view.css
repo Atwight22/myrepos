@@ -24,6 +24,7 @@
   }
   
   .comment-btn {
+    color:#88CCC4;
     margin: 0px 10px;
   }
   
@@ -46,6 +47,26 @@
     margin-left: 5px;
     color: #a0a0a0;
   }
+
+  .comment-copy,.comment-edit,.comment-delete {
+    display: block;
+    position: relative;
+    width: 70px;
+    padding: 0.2em;
+    text-align: center;
+    text-decoration: none;
+    color: #1B1B1B;
+    background: #fff;
+    border:1px solid #fff;
+    border-radius:5px;
+    margin-left:5px;
+  }
+  .comment-copy:hover,.comment-edit:hover,.comment-delete:hover {
+     background: #F2F2F2;
+     cursor: pointer;
+     text-decoration: none;
+  }
+  
 
   /*# sourceMappingURL=view.css.map */
 
