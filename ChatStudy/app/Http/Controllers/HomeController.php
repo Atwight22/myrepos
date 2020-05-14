@@ -72,10 +72,10 @@ public function getData()
     return response()->json($json);
 }
 
-//自分のコメントのみ取得
-// public function getUserId(){
-//      // ログイン中のユーザーID
-//      $userId = Auth::id();
-//      return view('home',compact('userId'));
-// }
+//自分のIDのみ取得
+public function getId(){
+    $user = Auth::user();
+    $logId = $user->id;
+   return  response()->json($logId);
+}
 }
